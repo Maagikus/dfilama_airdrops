@@ -123,6 +123,7 @@ export class DeFiLlamaScraper {
       try {
         // Primeira tentativa: scraping direto da página
         airdrops = await this.scrapeAirdropsPage();
+        console.log("airdrops", airdrops);
         if (airdrops.length > 0) {
           console.log(
             `✅ Extraídos ${airdrops.length} airdrops via scraping direto`
@@ -132,6 +133,7 @@ export class DeFiLlamaScraper {
       } catch (error) {
         console.log("⚠️ Scraping direto falhou, tentando API alternativa...");
       }
+      return airdrops;
 
       try {
         // Segunda tentativa: usar API de protocolos e inferir airdrops
@@ -140,7 +142,6 @@ export class DeFiLlamaScraper {
         //   console.log(
         //     `✅ Gerados ${airdrops.length} airdrops potenciais via API`
         //   );
-        return airdrops;
       } catch (error) {
         console.log("⚠️ API de protocolos falhou, usando dados de exemplo...");
       }
